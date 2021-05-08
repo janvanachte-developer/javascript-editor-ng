@@ -5,7 +5,9 @@ import { CodeBoxComponent } from './codebox/code-box.component';
 
 
 @NgModule({
-  declarations: [CodeBoxComponent],
+  declarations: [
+      CodeBoxComponent
+  ],
   imports: [
     CommonModule
   ]

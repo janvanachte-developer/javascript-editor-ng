@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
-  selector: 'app-codebox',
+  selector: 'code-box',
   templateUrl: './code-box.component.html',
   styleUrls: ['./code-box.component.css']
 })
