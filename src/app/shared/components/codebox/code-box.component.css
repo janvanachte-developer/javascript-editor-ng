@@ -1,0 +1,27 @@
+/*https://moderncss.dev/custom-css-styles-for-form-inputs-and-textareas/*/
+:root {
+    --input-border: #8b8a8b;
+    --input-focus-h: 245;
+    --input-focus-s: 100%;
+    --input-focus-l: 42%;
+}
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+.textareaclass {
+    font-size: 16px;
+    font-size: max(16px, 1em);
+    font-family: inherit;
+    padding: 0.25em 0.5em;
+    background-color: #fff;
+/*    border: 2px solid var(--input-border);*/
+    border-radius: 4px;
+}
+/*https://css-tricks.com/textarea-tricks/*/
+#textareaid {
+    resize: none;
+    width: 50em;
+    height: 10em;
+}
