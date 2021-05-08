@@ -144,7 +144,7 @@
             "implements": [
                 "OnInit"
             ],
-            "templateData": "<textarea class=\"textareaclass\" id=\"textareaid\" value=\"{{value}}\"></textarea>"
+            "templateData": "<textarea class=\"form-control\" id=\"textareaid\" value=\"{{value}}\"></textarea>"
         }
     ],
     "modules": [
