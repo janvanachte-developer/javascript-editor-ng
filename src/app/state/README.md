@@ -1,0 +1,1 @@
+https://blog.ng-book.com/introduction-to-redux-with-typescript-and-angular-2/
