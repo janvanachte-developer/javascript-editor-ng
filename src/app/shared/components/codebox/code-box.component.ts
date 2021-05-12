@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'code-box',
@@ -8,9 +8,15 @@ import {Component, Input, OnInit} from '@angular/core';
 export class CodeBoxComponent implements OnInit {
 
   @Input() value: string
+  @Output() valueEvent= new EventEmitter<string>();
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  onChange(event) {
+    console.log('event' + event.target.value );
+    this.valueEvent.emit(event.target.value);
+
+  }
 }
