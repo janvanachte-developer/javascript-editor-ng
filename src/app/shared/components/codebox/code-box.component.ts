@@ -8,7 +8,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 export class CodeBoxComponent implements OnInit {
 
   @Input() value: string
-  @Output() valueEvent= new EventEmitter<string>();
+  @Output() valueChange= new EventEmitter<string>();
   constructor() { }
 
   ngOnInit(): void {
@@ -16,7 +16,7 @@ export class CodeBoxComponent implements OnInit {
 
   onChange(event) {
     console.log('event' + event.target.value );
-    this.valueEvent.emit(event.target.value);
+    this.valueChange.emit(event.target.value);
 
   }
 }
