@@ -11,7 +11,7 @@ import {
 
 // ----------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------- //
-
+// https://www.bennadel.com/blog/3538-on-the-irrational-demonization-of-two-way-data-binding-in-angular.htm
 // This component supports both ONE-WAY and TWO-WAY data-binding. The TWO-WAY data-
 // bindings is facilitated by the "tags" and "tagsChange" output events. These events
 // allow for the "box of bananas" template syntax.
