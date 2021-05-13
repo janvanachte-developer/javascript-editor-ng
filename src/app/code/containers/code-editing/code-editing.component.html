@@ -1,5 +1,20 @@
 <p>code-editing works!</p>
 <code-metadata [code]="_store.getState()"></code-metadata>
-<code-box [value]="codeAsString" (valueEvent)="updateCode($event)"></code-box>
+<h3>
+    Using Two-Way Data Binding
+</h3>
+
+<tags [(tags)]="tagsA"></tags>
+
+<h3>
+    Using One-Way Data Flow
+</h3>
+
+<tags
+        [tags]="tagsB"
+        (add)="addTagToB( $event )"
+        (remove)="removeFromB( $event )">
+</tags>
+<code-box [value]="codeAsString" (valueChange)="updateCode($event)"></code-box>
 
 

@@ -1,0 +1,19 @@
+<label (click)="input.focus()">
+			<span *ngFor="let tag of tags ; let index = index" class="tag">
+				<span class="tag__name">
+					{{ tag }}
+				</span>
+				<a (click)="removeTagAtIndex( index )" class="tag__delete">
+					&#9003;
+				</a>
+			</span>
+
+    <!-- NOTE: Input uses NgModel for component-local TWO-WAY DATA-BINDING. -->
+    <input
+        #input
+        type="text"
+        name="newTagNamealias"
+        [(ngModel)]="newTagName"
+        (keydown.Enter)="processNewTag( $event )"
+    />
+</label>
