@@ -24,7 +24,7 @@ class Store<STATE> {
     }
 
     dispatch(action: Action): void {
-        this._state = this.reducer(this._state, action);
+        this._state = this.reducer(this._state, action, this);
         this._listeners.forEach((listener: ListenerCallback) => listener());
     }
 }
