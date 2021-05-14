@@ -1,6 +1,6 @@
 <section>
     <label>File</label>
-    <input value="{{code.filePath}}" readonly="true">
+    <input type="file" (change)="changeFile($event)">
     <p>code-matadata works!</p>
 </section>
 

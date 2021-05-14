@@ -63,7 +63,6 @@ export class CodeEditingComponent implements OnInit, OnDestroy {
                 type: CodeStoreService.SET_CODE,
                 payload: codeAsString
             })
-
     }
 
     ngOnDestroy(): void {
@@ -71,4 +70,12 @@ export class CodeEditingComponent implements OnInit, OnDestroy {
     }
 
 
+    changeFile(file: any) {
+        console.log('changeFile ' + file)
+        this._service.dispatch(
+            {
+                type: CodeStoreService.SET_FILEPATH,
+                payload: file
+            })
+    }
 }

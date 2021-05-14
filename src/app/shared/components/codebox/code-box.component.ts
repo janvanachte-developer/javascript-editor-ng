@@ -8,7 +8,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 export class CodeBoxComponent implements OnInit {
 
   @Input() value: string
-  @Output() valueChange= new EventEmitter<string>();
+  @Output() valueChange = new EventEmitter<string>();
   constructor() { }
 
   ngOnInit(): void {

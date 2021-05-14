@@ -5,7 +5,6 @@ import {ComponentsModule} from "../shared/components/components.module";
 import CodeStoreService from "./state/code-store.service";
 import {CodeMetadataComponent} from "./components/code-matadata/code-metadata.component";
 
-
 @NgModule({
     declarations: [
         CodeEditingComponent,
@@ -19,7 +18,7 @@ import {CodeMetadataComponent} from "./components/code-matadata/code-metadata.co
         ComponentsModule
     ],
     providers: [
-        CodeStoreService
+        CodeStoreService,
     ]
 })
 export class CodeModule {
