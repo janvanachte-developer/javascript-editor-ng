@@ -1,39 +1,32 @@
 import {Action} from "./action";
 import {Reducer} from "./reducer";
+import {BehaviorSubject, Subject} from "rxjs";
+import {scan} from "rxjs/operators";
 
-class Store<STATE> {
-    private _state: STATE;
-    private _listeners: ListenerCallback[] = [];
+class Store<STATE> extends BehaviorSubject<STATE> {
+    private dispatcher: Subject<Action>
 
     constructor(
         private reducer: Reducer<STATE>,
         initialState: STATE
     ) {
-        this._state = initialState;
+        super(initialState);
+        this.dispatcher = new Subject<Action>();
+        this.dispatcher
+            .pipe(
+                scan((state: STATE, action: Action) => this.reducer(state, action, this),
+                    initialState)
+            ).subscribe((state) => super.next(state))
+        ;
     }
 
     getState(): STATE {
-        return this._state;
-    }
-
-    subscribe(listener: ListenerCallback): UnsubscribeCallback {
-        this._listeners.push(listener);
-        return () => { // returns an "unsubscribe" function
-            this._listeners = this._listeners.filter(l => l !== listener);
-        };
+        return this.value;
     }
 
     dispatch(action: Action): void {
-        this._state = this.reducer(this._state, action, this);
-        this._listeners.forEach((listener: ListenerCallback) => listener());
+        this.dispatcher.next(action);
     }
 }
 
 export default Store;
-
-export interface ListenerCallback {
-    (): void;
-}
-export interface UnsubscribeCallback {
-    (): void;
-}

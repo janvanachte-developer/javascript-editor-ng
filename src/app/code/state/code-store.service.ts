@@ -65,7 +65,7 @@ return state;
 class CodeStoreService {
 
     private _store: Store<CodeModel>;
-    private _observableState: Observable<CodeModel>;
+
     static SET_CODE: string = 'SET_CODE';
     static ADD_TAG: string = 'ADD_TAG';
     static REMOVE_TAG = 'REMOVE_TAG';
@@ -75,21 +75,14 @@ class CodeStoreService {
         const reducer: Reducer<CodeModel> = CodeStateReducer;
         const initialState: CodeModel = {
             tags: ['new'],
-            filePath: 'somedir/somefile.js',
+            filePath: '',
             codeAsString: "some code"
         };
         this._store = new Store<CodeModel>(reducer, initialState);
-        this._observableState = new Observable((observer) => {
-
-            observer.next(initialState);
-            this._store.subscribe(() =>
-                observer.next(this._store.getState())
-            );
-        })
     }
 
     getStore(): Observable<CodeModel> {
-        return this._observableState;
+        return this._store;
     }
 
     dispatch(action: Action): void {
