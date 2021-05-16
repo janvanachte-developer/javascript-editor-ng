@@ -4,16 +4,16 @@
     Using Two-Way Data Binding
 </h3>
 
-<tags [(tags)]="tagsA"></tags>
+<tags [(tags)]="tagsWith2WayBinding"></tags>
 
 <h3>
     Using One-Way Data Flow
 </h3>
 
 <tags
-        [tags]="tagsB"
-        (add)="addTagToB( $event )"
-        (remove)="removeFromB( $event )">
+        [tags]="tags"
+        (add)="addTag( $event )"
+        (remove)="removeTag( $event )">
 </tags>
 <code-box [value]="codeAsString" (valueChange)="updateCode($event)"></code-box>
 
