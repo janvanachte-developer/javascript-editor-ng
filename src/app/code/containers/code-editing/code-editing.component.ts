@@ -2,7 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import CodeStoreService from "../../state/code-store.service";
 import {CodeModel} from "../../state/model/code.model";
 import {Subscription} from "rxjs";
-import {CodeActions} from "../../state/actions/code-actions";
+import {CodeActions, setFilePath, updateCodeAsString} from "../../state/actions/code-actions";
 
 @Component({
     selector: 'app-code-editing',
@@ -36,14 +36,13 @@ export class CodeEditingComponent implements OnInit, OnDestroy {
 
     updateCode(codeAsString: string) {
         console.log('updateCode ' + codeAsString)
-        this._service.dispatch(
-            CodeActions.updateCodeAsString(codeAsString))
+        this._service.dispatch(updateCodeAsString(codeAsString))
     }
 
-    changeFile(file: any) {
+    changeFile(file: File) {
         console.log('changeFile ' + file)
-        this._service.dispatch(
-            CodeActions.readFileAndUpdateCodeAsString(file))
+        this._service.dispatch(setFilePath(file.name))
+        this._service.dispatch(CodeActions.readFileAndUpdateCodeAsString(file))
     }
 
     addTag(newTagName: string): void {

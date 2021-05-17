@@ -1,39 +1,55 @@
 import {Directive, Injectable} from "@angular/core";
 import {CodeModel} from "./model/code.model";
-import {Action} from "../../state/model/action";
-import Store from "../../state/model/store";
-import {Reducer} from "../../state/model/reducer";
+
 import {Observable} from "rxjs";
+import {Action, Reducer, Store, createStore} from "redux";
+import {
+    AddTagAction, CodeActions,
+    ReadFileAndUpdateCodeAsStringAction,
+    RemoveTagAction, SetFilePathAction,
+    UpdateCodeAsStringAction
+} from "./actions/code-actions";
 
-const CodeStateReducer = (state: CodeModel, action: Action, store: Store<CodeModel>) => {
+const initialState: CodeModel = {
+    tags: ['new'],
+    filePath: '',
+    codeAsString: "some code"
+};
 
-    console.log('Action ' + action.type + ' payload ' + action.payload);
+const CodeStateReducer:Reducer<CodeModel> = (state: CodeModel = initialState, action: Action) => {
+
+    console.log('Action ' + action.type );
 
     switch (action.type) {
-        case CodeStoreService.SET_CODE:
+        case CodeActions.SET_CODE:
             return {
                 filePath: state.filePath,
-                codeAsString: action.payload + ';',
+                codeAsString: (<UpdateCodeAsStringAction>action).payload ,
                 tags: state.tags
             }
 
-        case CodeStoreService.ADD_TAG:
+        case CodeActions.SET_FILEPATH:
+            return {
+                filePath: (<SetFilePathAction>action).payload,
+                codeAsString: state.codeAsString
+                tags: state.tags
+            }
+
+        case CodeActions.ADD_TAG:
             return {
                 filePath: state.filePath,
                 codeAsString: state.codeAsString,
-                tags: [...state.tags, action.payload]
+                tags: [...state.tags, (<AddTagAction>action).payload]
             }
 
-        case CodeStoreService.REMOVE_TAG:
+        case CodeActions.REMOVE_TAG:
             return {
                 filePath: state.filePath,
                 codeAsString: state.codeAsString,
-                tags: [...state.tags.slice(0, action.payload), ...state.tags.slice(action.payload + 1)]
+                tags: [...state.tags.slice(0, (<RemoveTagAction>action).payload), ...state.tags.slice(action.payload + 1)]
             }
 
-        case CodeStoreService.SET_FILEPATH: {
-
-            console.log("file " + action.payload);
+        case CodeActions.READ_FILE_INTO_CODE: {
 
             let codeAsString: string | ArrayBuffer = "";
             const fileReader = new FileReader();
@@ -47,18 +63,18 @@ const CodeStateReducer = (state: CodeModel, action: Action, store: Store<CodeMod
                 })
             }
 
-            console.log('filereader reading ' + (<File>action.payload).name);
-            fileReader.readAsText((<File>action.payload));
-            console.log('filereader read ' + (<File>action.payload).name);
+            console.log('filereader reading ' + (<File>(<ReadFileAndUpdateCodeAsStringAction>action).payload).name);
+            fileReader.readAsText((<File>(<ReadFileAndUpdateCodeAsStringAction>action).payload));
+            console.log('filereader read ' + (<File>(<ReadFileAndUpdateCodeAsStringAction>action).payload).name);
             return {
-                filePath: (<File>action.payload).name,
+                filePath: (<File>(<ReadFileAndUpdateCodeAsStringAction>action).payload).name,
                 codeAsString: state.codeAsString,
                 tags: state.tags
             }
+        }
     }
-}
 
-return state;
+    return state;
 }
 
 @Injectable()
@@ -66,19 +82,10 @@ class CodeStoreService {
 
     private _store: Store<CodeModel>;
 
-    static SET_CODE: string = 'SET_CODE';
-    static ADD_TAG: string = 'ADD_TAG';
-    static REMOVE_TAG = 'REMOVE_TAG';
-    static SET_FILEPATH = 'SET_FILEPATH';
-
     constructor() {
         const reducer: Reducer<CodeModel> = CodeStateReducer;
-        const initialState: CodeModel = {
-            tags: ['new'],
-            filePath: '',
-            codeAsString: "some code"
-        };
-        this._store = new Store<CodeModel>(reducer, initialState);
+
+        this._store = createStore<CodeModel, Action, >(reducer);
     }
 
     getStore(): Observable<CodeModel> {
