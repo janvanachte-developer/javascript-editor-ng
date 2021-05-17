@@ -4,35 +4,46 @@ import {Action} from "../../state/model/action";
 import Store from "../../state/model/store";
 import {Reducer} from "../../state/model/reducer";
 import {Observable} from "rxjs";
+import {CodeActions} from "./actions/code-actions";
 
 const CodeStateReducer = (state: CodeModel, action: Action, store: Store<CodeModel>) => {
 
     console.log('Action ' + action.type + ' payload ' + action.payload);
 
     switch (action.type) {
-        case CodeStoreService.SET_CODE:
+        case CodeActions.SET_CODE:
+            console.log('Action ' + action.type + ' payload ' + action.payload);
             return {
                 filePath: state.filePath,
-                codeAsString: action.payload + ';',
+                codeAsString: action.payload,
                 tags: state.tags
             }
 
-        case CodeStoreService.ADD_TAG:
+        case CodeActions.SET_FILEPATH:
+            console.log('Action ' + action.type + ' payload ' + action.payload);
+            return {
+                filePath: action.payload,
+                codeAsString: state.codeAsString,
+                tags: state.tags
+            }
+
+        case CodeActions.ADD_TAG:
+            console.log('Action ' + action.type + ' payload ' + action.payload);
             return {
                 filePath: state.filePath,
                 codeAsString: state.codeAsString,
                 tags: [...state.tags, action.payload]
             }
 
-        case CodeStoreService.REMOVE_TAG:
+        case CodeActions.REMOVE_TAG:
+            console.log('Action ' + action.type + ' payload ' + action.payload);
             return {
                 filePath: state.filePath,
                 codeAsString: state.codeAsString,
                 tags: [...state.tags.slice(0, action.payload), ...state.tags.slice(action.payload + 1)]
             }
 
-        case CodeStoreService.SET_FILEPATH: {
-
+        case CodeActions.READ_FILE_INTO_CODE: {
             console.log("file " + action.payload);
 
             let codeAsString: string | ArrayBuffer = "";
@@ -42,7 +53,7 @@ const CodeStateReducer = (state: CodeModel, action: Action, store: Store<CodeMod
                 console.log('Content ', codeAsString);
 
                 store.dispatch({
-                    type: CodeStoreService.SET_CODE,
+                    type: CodeActions.SET_CODE,
                     payload: codeAsString
                 })
             }
@@ -55,21 +66,16 @@ const CodeStateReducer = (state: CodeModel, action: Action, store: Store<CodeMod
                 codeAsString: state.codeAsString,
                 tags: state.tags
             }
+        }
     }
-}
 
-return state;
+    return state;
 }
 
 @Injectable()
 class CodeStoreService {
 
     private _store: Store<CodeModel>;
-
-    static SET_CODE: string = 'SET_CODE';
-    static ADD_TAG: string = 'ADD_TAG';
-    static REMOVE_TAG = 'REMOVE_TAG';
-    static SET_FILEPATH = 'SET_FILEPATH';
 
     constructor() {
         const reducer: Reducer<CodeModel> = CodeStateReducer;

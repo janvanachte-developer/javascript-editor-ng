@@ -1,26 +1,60 @@
 import CodeStoreService from "../code-store.service";
+import {Action} from "../../../state/model/action";
+
+export interface UpdateCodeAsStringAction extends Action {
+    payload: string
+}
+
+export interface SetFilePathAction extends Action {
+    payload: string
+}
+
+export interface ReadFileAndUpdateCodeAsStringAction extends Action {
+    payload: File
+}
+
+export interface AddTagAction extends Action {
+    payload: string
+}
+
+export interface RemoveTagAction extends Action {
+    payload: number
+}
 
 export class CodeActions {
 
-    public static updateCodeAsString(codeAsString: string) {
+    static ADD_TAG = 'ADD_TAG';
+    static SET_FILEPATH = 'SET_FILEPATH';
+    static REMOVE_TAG = 'REMOVE_TAG';
+    static READ_FILE_INTO_CODE = 'READ_FILE_INTO_CODE';
+    static SET_CODE = 'SET_CODE';
+
+    public static updateCodeAsString(codeAsString: string): UpdateCodeAsStringAction {
         return {
-            type: CodeStoreService.SET_CODE,
+            type: CodeActions.SET_CODE,
             payload: codeAsString
         };
     }
 
-    public static readFileAndUpdateCodeAsString(file: any) {
+    public static setFilePath(filePath: string): SetFilePathAction {
         return {
-            type: CodeStoreService.SET_FILEPATH,
+            type: CodeActions.SET_FILEPATH,
+            payload: filePath
+        };
+    }
+
+    public static readFileAndUpdateCodeAsString(file: any): ReadFileAndUpdateCodeAsStringAction {
+        return {
+            type: CodeActions.READ_FILE_INTO_CODE,
             payload: file
         };
     }
 
-    public static addTag(newTagName: string) {
-        return {type: CodeStoreService.ADD_TAG, payload: newTagName};
+    public static addTag(newTagName: string): AddTagAction {
+        return {type: CodeActions.ADD_TAG, payload: newTagName};
     }
 
-    public static removeTag(index: number) {
-        return {type: CodeStoreService.REMOVE_TAG, payload: index};
+    public static removeTag(index: number): RemoveTagAction {
+        return {type: CodeActions.REMOVE_TAG, payload: index};
     }
 }
