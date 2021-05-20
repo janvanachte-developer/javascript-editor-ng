@@ -72,7 +72,7 @@ export class TagsComponent implements  OnChanges {
 
 
     // I process the new tag name.
-    public processNewTag( event: KeyboardEvent ) : void {
+    public processNewTag( event  ) : void {
 
         // Since this may be inside of a Form, we want to prevent the default behavior
         // of the key-event so as to not accidentally submit the parent form.
