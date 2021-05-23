@@ -1,5 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {CodeModel} from "../../state/code.model";
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 
 @Component({
     selector: 'code-metadata',
@@ -8,9 +7,7 @@ import {CodeModel} from "../../state/code.model";
 })
 export class CodeMetadataComponent implements OnInit {
 
-    @Input() code: CodeModel
     @Output() file = new EventEmitter<File>();
-
     constructor() {
     }
 

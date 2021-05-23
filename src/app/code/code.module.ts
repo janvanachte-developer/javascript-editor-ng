@@ -2,7 +2,7 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {CodeEditingComponent} from "./containers/code-editing/code-editing.component";
 import {ComponentsModule} from "../shared/components/components.module";
-import CodeStoreService from "./state/code-store.service";
+import CodeStateService from "./state/code-state.service";
 import {CodeMetadataComponent} from "./components/code-matadata/code-metadata.component";
 import { EffectsModule } from '@ngrx/effects';
 import { CodeEffects } from './state/code.effects';
@@ -26,7 +26,7 @@ import {FileUploadService} from "./file/file-upload.service";
         StoreModule.forFeature(fromCode.codeFeatureKey, fromCode.reducer)
     ],
     providers: [
-        CodeStoreService,
+        CodeStateService,
         FileReadService,
         FileUploadService
     ]

@@ -9,6 +9,7 @@ import {EffectsModule} from "@ngrx/effects";
 import {StoreModule} from "@ngrx/store";
 import {StoreDevtoolsModule} from "@ngrx/store-devtools";
 import {environment} from "../environments/environment.prod";
+import {rootInitialState, rootMetaReducers, rootReducers} from "./state/app.reducer";
 
 @NgModule({
     declarations: [
@@ -19,18 +20,17 @@ import {environment} from "../environments/environment.prod";
         AppRoutingModule,
         ComponentsModule,
         CodeModule,
-
-/*        StoreModule.forRoot(
-            appReducer,
-            { metaReducers, initialState: rootInitialState }
-        ),
-        EffectsModule.forRoot([]),*/
-        StoreModule.forRoot({}),
+        StoreModule.forRoot(
+            rootReducers,
+            {
+                metaReducers: rootMetaReducers,
+                initialState: rootInitialState
+            }),
+        EffectsModule.forRoot(),
         StoreDevtoolsModule.instrument({
             maxAge: 25, // Retains last 25 states
             logOnly: environment.production, // Restrict extension to log-only mode
-        }),
-        EffectsModule.forRoot()
+        })
     ],
     providers: [],
     bootstrap: [AppComponent]

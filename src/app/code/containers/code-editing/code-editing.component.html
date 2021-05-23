@@ -1,20 +1,18 @@
-<p>code-editing works!</p>
-<code-metadata [code]="code" (file)="changeFile($event)"></code-metadata>
+<code-metadata (file)="changeFile($event)"></code-metadata>
 <h3>
     Using Two-Way Data Binding
 </h3>
-
 <tags [(tags)]="tagsWith2WayBinding"></tags>
 
 <h3>
     Using One-Way Data Flow
 </h3>
-
 <tags
         [tags]="tags"
         (add)="addTag( $event )"
         (remove)="removeTag( $event )">
 </tags>
+
 <code-box [value]="codeAsString" (valueChange)="updateCode($event)"></code-box>
 
 
