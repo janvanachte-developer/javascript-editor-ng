@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {CodeModel} from "../../state/model/code.model";
+import {CodeModel} from "../../state/code.model";
 
 @Component({
     selector: 'code-metadata',
