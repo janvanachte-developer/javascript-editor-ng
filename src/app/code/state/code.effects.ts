@@ -7,8 +7,7 @@ import {FileReadService} from "../file/file-read.service";
 @Injectable()
 export class CodeEffects {
 
-
-    constructor(private actions$: Actions, private service: FileReadService) {
+    constructor(private actions$: Actions, private fileReadService: FileReadService) {
     }
 
     readFileAndUpdateCodeAsString$ = createEffect(() => {
@@ -16,10 +15,8 @@ export class CodeEffects {
             ofType(readFileAndUpdateCodeAsString),
             switchMap(action =>
                 {
-                    console.log('effect ' + action.type);
-                    return this.service.readFileToString(action.payload).pipe(
+                    return this.fileReadService.readFileToString(action.payload).pipe(
                     map(codeAsString => {
-                        console.log('mapping ' + codeAsString);
                         return updateCodeAsString({payload: codeAsString})})
                    // , catchError((error) => Observable.of(readFileAndUpdateCodeAsStringError({payload: error}))
                 )}
