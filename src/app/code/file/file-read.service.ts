@@ -1,24 +1,36 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Observable} from "rxjs";
 
 @Injectable()
 export class FileReadService {
 
-  public readFileToString(file: File): Observable<string> {
+    public readAsTextObservable(file: File): Observable<string> {
+        return new Observable(observable => {
+            const fileReader = new FileReader();
 
-    return new Observable(observable => {
+            fileReader.onerror = error => observable.error(error);
+            fileReader.onabort = error => observable.error(error);
+            fileReader.onload = () => observable.next(<string>fileReader.result);
+            fileReader.onloadend = () => observable.complete();
+            fileReader.abort = () => observable.unsubscribe();
 
-      const reader = new FileReader();
+            return fileReader.readAsText(file);
+        });
+    }
 
-      reader.onerror = error => observable.error(error);
-      reader.onabort = error => observable.error(error);
-      reader.onload = () => observable.next(<string>reader.result);
-      reader.onloadend = () => observable.complete();
-      reader.abort = () => observable.unsubscribe();
+    public readAsTextPromise(file: File): Promise<string> {
+        return new Promise((resolve, reject) => {
+            const fileReader = new FileReader();
 
-      return reader.readAsText(file);
-    });
-  }
+            fileReader.onerror = reject;
+            fileReader.onabort = reject;
+            fileReader.onload = () => { resolve(<string>fileReader.result) };
+            fileReader.abort = reject;
 
-  constructor() { }
+            fileReader.readAsText(file);
+        });
+    }
+
+    constructor() {
+    }
 }

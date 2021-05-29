@@ -17,7 +17,7 @@ export const readFileAndUpdateCodeAsString = createAction(
 
 export const readFileAndUpdateCodeAsStringError = createAction(
     'READ_FILE_INTO_CODE_ERROR',
-    props<{ payload: File }>()
+    props<{ payload: File, error: any }>()
 );
 
 export const addTag = createAction(

@@ -1,7 +1,8 @@
 import * as fromCode from './code.actions';
+import {updateCodeAsString} from "./code.actions";
 
-describe('loadCodes', () => {
+describe('updateCodeAsString', () => {
   it('should return an action', () => {
-    expect(fromCode.setFilePath(null).type).toBe('[Code] Load Codes');
+    expect(fromCode.updateCodeAsString(null).type).toBe('SET_CODE');
   });
 });
