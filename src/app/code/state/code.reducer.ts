@@ -1,5 +1,5 @@
 import {createReducer, on} from '@ngrx/store';
-import {addTag, removeTag, setFilePath, updateCodeAsString} from "./code.actions";
+import {addTag, readFileAndUpdateCodeAsStringError, removeTag, setFilePath, updateCodeAsString} from "./code.actions";
 
 export const codeFeatureKey = 'code';
 
@@ -38,5 +38,9 @@ export const reducer = createReducer(codeInitialState,
         filePath: state.filePath,
         codeAsString: state.codeAsString,
         tags: [...state.tags.slice(0, payload), ...state.tags.slice(payload + 1)]
-    }))
+    })),
+    on(readFileAndUpdateCodeAsStringError, (state, {payload, error}) => {
+        console.error(error);
+        return state;
+    })
 );
