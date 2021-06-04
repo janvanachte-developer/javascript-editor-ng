@@ -1,3 +1,5 @@
+@import "~prismjs/themes/prism-dark.css";
+
 /*https://moderncss.dev/custom-css-styles-for-form-inputs-and-textareas/*/
 :root {
     --input-border: #8b8a8b;
@@ -25,3 +27,53 @@
     width: 50em;
     height: 10em;
 }
+
+#textareaid, #highlighting {
+    /* Both elements need the same text and space styling so they are directly on top of each other */
+    margin: 10px;
+    padding: 10px;
+    border: 0;
+    width: calc(100% - 32px);
+    height: 150px;
+}
+
+#textareaid, #highlighting, #highlighting * {
+    /* Also add text styles to highlighting tokens */
+    font-size: 15pt;
+    font-family: monospace;
+    line-height: 20pt;
+}
+
+/*#textareaid, #highlighting {
+    position: absolute;
+    top: 0;
+    left: 0;
+}*/
+
+/* Move the textarea in front of the result */
+#textareaid {
+    z-index: 1;
+}
+
+#highlighting {
+    z-index: 0;
+}
+
+/* Make textarea almost completely transparent */
+/*#textareaid {
+    color: transparent;
+    background: transparent;
+    caret-color: white; !* Or choose your favorite color *!
+}*/
+
+/* Can be scrolled */
+#textareaid, #highlighting {
+    overflow: auto;
+    white-space: nowrap; /* Allows textarea to scroll horizontally */
+}
+
+/* No resize on textarea */
+#textareaid {
+    resize: none;
+}
+

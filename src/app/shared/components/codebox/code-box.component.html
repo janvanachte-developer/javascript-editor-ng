@@ -1,1 +1,11 @@
-<textarea class="form-control" id="textareaid" value="{{value}}"></textarea>
+<textarea class="form-control" id="textareaid" value="{{value}}" (input)="onInput($event); sync_scroll(this);"  (keydown)="check_tab(this, $event);" ></textarea>
+<pre id="highlighting" aria-hidden="true">
+  <code class="language-markup" id="highlighting-content">>
+  </code>
+</pre>
+
+<pre>
+   <code class="language-markup">
+&lt;img src="example.png"&gt;
+   </code>
+</pre>
