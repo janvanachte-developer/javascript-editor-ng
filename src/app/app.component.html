@@ -1,2 +1,15 @@
-<p>app works!</p>
-<app-code-editing></app-code-editing>
+<!--see https://getbootstrap.com/docs/5.0/components/navbar/-->
+<nav class="navbar navbar-expand-sm navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/">
+            <img src="/assets/brand-logo.svg" alt="" width="30" height="24" class="d-inline-block align-text-top">
+            Rule Management
+        </a>
+        <ul class="nav navbar-nav" routerLinkActive="active">
+            <li class="nav-item"><a class="nav-link" routerLink="rules">Rules</a></li>
+            <li class="nav-item"><a class="nav-link" routerLink="about">About</a></li>
+        </ul>
+    </div>
+</nav>
+
+<router-outlet></router-outlet>

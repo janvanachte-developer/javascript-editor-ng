@@ -1,0 +1,13 @@
+<nav>
+    <!--see https://getbootstrap.com/docs/5.0/components/navbar/-->
+    <ul class="nav nav-tabs">
+        <li *ngFor="let rule of rules" class="nav-item">
+            <a class="nav-link" [ngClass]="{'active' : rule.active}" routerLink="/rules/{{rule.id}}">{{rule.name }}</a>
+        </li>
+        <li>
+            <button class="btn btn-link">+</button>
+        </li>
+    </ul>
+</nav>
+
+

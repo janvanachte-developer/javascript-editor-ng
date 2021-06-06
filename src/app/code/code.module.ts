@@ -4,20 +4,23 @@ import {CodeEditingComponent} from "./containers/code-editing/code-editing.compo
 import {ComponentsModule} from "../shared/components/components.module";
 import CodeStateService from "./state/code-state.service";
 import {CodeMetadataComponent} from "./components/code-matadata/code-metadata.component";
-import { EffectsModule } from '@ngrx/effects';
-import { CodeEffects } from './state/code.effects';
-import { StoreModule } from '@ngrx/store';
+import {EffectsModule} from '@ngrx/effects';
+import {CodeEffects} from './state/code.effects';
+import {StoreModule} from '@ngrx/store';
 import * as fromCode from './state/code.reducer';
 import {FileReadService} from "./file/file-read.service";
 import {FileUploadService} from "./file/file-upload.service";
+import {CodeEditingTabsComponent} from "./navigation/code-editing-tab/code-editing-tabs.component";
+
 
 @NgModule({
     declarations: [
         CodeEditingComponent,
-        CodeMetadataComponent
+        CodeMetadataComponent,
+        CodeEditingTabsComponent
     ],
     exports: [
-        CodeEditingComponent
+        CodeEditingTabsComponent
     ],
     imports: [
         CommonModule,
