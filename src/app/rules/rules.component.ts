@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Rule} from "./model/rule";
+import RulesStateService from "./state/rules-state.service";
 
 @Component({
     selector: 'app-rules',
@@ -8,14 +9,22 @@ import {Rule} from "./model/rule";
 })
 export class RulesComponent implements OnInit {
 
-    rules: Rule[] = [
-        {id: 'rule1', name: 'Rule 1', active: false},
-        {id: 'rule2', name: 'Rule With a Longer Name', active: true},
-        {id: 'rule3', name: 'Another Rule', active: false},
-        {id: 'rule4', name: 'Rule 4', active: false}
-    ]
+    rules: Rule[];
 
-    ngOnInit(): void {
+    constructor(private service: RulesStateService) {
+        // appState.subscribe(something => {
+        //     console.log('new state: ' + JSON.stringify(something));
+        //     // @ts-ignore
+        //     this.rules = something.rules.rules;
+        //     console.log('new value for rules: ' + JSON.stringify(this.rules));
+        // })
     }
 
+    ngOnInit(): void {
+        this.service.subscribe(next => this.rules = next.rules);
+    }
+
+    addRule() {
+        this.service.addRule();
+    }
 }

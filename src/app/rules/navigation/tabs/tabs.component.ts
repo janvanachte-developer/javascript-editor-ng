@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {Rule} from "../../model/rule";
 
 @Component({
@@ -6,10 +6,12 @@ import {Rule} from "../../model/rule";
   templateUrl: './tabs.component.html',
   styleUrls: ['./tabs.component.css']
 })
-export class RulesTabsComponent implements OnInit {
+export class RulesTabsComponent {
 
   @Input() rules: Rule[];
-  ngOnInit(): void {
-  }
+  @Output("add") add= new EventEmitter()
 
+  onAddButtonClick($event) {
+    this.add.emit()
+  }
 }

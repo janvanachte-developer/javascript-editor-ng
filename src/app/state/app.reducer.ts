@@ -1,11 +1,14 @@
 import {Action, ActionReducer, ActionReducerMap, createReducer, MetaReducer} from '@ngrx/store';
 import {codeInitialState, CodeState} from "../code/state/code.reducer";
+import {rulesInitialState, RulesState} from "../rules/state/rules.reducer";
 
 export interface AppState {
+    rules: RulesState,
     code: CodeState
 }
 
 export const rootInitialState: AppState = {
+    rules: rulesInitialState,
     code: codeInitialState
 };
 

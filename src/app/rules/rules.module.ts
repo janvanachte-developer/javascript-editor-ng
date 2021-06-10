@@ -9,21 +9,24 @@ import {RuleExecutionComponent} from './containers/rule-execution/rule-execution
 import {RulesTabsComponent} from './navigation/tabs/tabs.component';
 import {RulesCardsComponent} from './component/rules-cards/rules-cards.component';
 import {RuleSideMenuComponent} from './navigation/side-menu/side-menu.component';
+import {RulesStateModule} from "./state/rules-state.module";
 
 
 @NgModule({
-  declarations: [
-    RulesComponent,
-    RuleEditingComponent,
-    RuleComponent,
-    RuleExecutionComponent,
-    RulesCardsComponent,
-    RulesTabsComponent,
-    RuleSideMenuComponent
-  ],
-  imports: [
-    CommonModule,
-    RulesRoutingModule
-  ]
+    declarations: [
+        RulesComponent,
+        RuleEditingComponent,
+        RuleComponent,
+        RuleExecutionComponent,
+        RulesCardsComponent,
+        RulesTabsComponent,
+        RuleSideMenuComponent
+    ],
+    imports: [
+        CommonModule,
+        RulesStateModule,
+        RulesRoutingModule
+    ]
 })
-export class RulesModule { }
+export class RulesModule {
+}

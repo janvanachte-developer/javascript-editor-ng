@@ -1,11 +1,11 @@
 <nav>
     <!--see https://getbootstrap.com/docs/5.0/components/navbar/-->
     <ul class="nav nav-tabs">
-        <li *ngFor="let rule of rules" class="nav-item">
-            <a class="nav-link" [ngClass]="{'active' : rule.active}" routerLink="/rules/{{rule.id}}">{{rule.name }}</a>
+        <li *ngFor="let item of rules" class="nav-item">
+            <a class="nav-link" [ngClass]="{'active' : item.active}" routerLink="/rules/{{item.id}}">{{item.name }}</a>
         </li>
         <li>
-            <button class="btn btn-link">+</button>
+            <button class="btn btn-link" (click)="onAddButtonClick($event)">+</button>
         </li>
     </ul>
 </nav>
