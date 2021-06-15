@@ -5,9 +5,15 @@ import {addRule, selectRule} from "./rules.actions";
 export const rulesFeatureKey = 'rules';
 
 export interface RulesState {
+    selected?: Rule;
     rules: Rule[]
 }
 
+export const rulesInitialState: RulesState = {
+    rules: [
+    ]
+};
+/*
 export const rulesInitialState: RulesState = {
     rules: [
         {id: 'rule1', name: 'Rule 1', active: false},
@@ -16,9 +22,26 @@ export const rulesInitialState: RulesState = {
         {id: 'rule4', name: 'Rule 4', active: false}
     ]
 };
+*/
+/*export const rulesInitialState = () => {
+
+    console.log('########## rulesInitialState ');
+
+    console.log(InjectorInstance ? 'InjectorInstance exists' : 'InjectorInstance does not exist')
+
+    const state: RulesState = {
+        rules: [
+            {id: 'rule1', name: 'Rule 1', active: false},
+            {id: 'rule2', name: 'Rule With a Longer Name', active: true},
+            {id: 'rule3', name: 'Another Rule', active: false},
+            {id: 'rule4', name: 'Rule 4', active: false}
+        ]
+    };
+    return state
+}*/
 
 export const reducer = createReducer(rulesInitialState,
-    on(selectRule, (state, {id}) => {
+    on(selectRule, (state: RulesState, {id}) => {
 
         const newRules: Rule[] = [];
 
@@ -43,7 +66,7 @@ export const reducer = createReducer(rulesInitialState,
         return newState
     }),
 
-    on(addRule, (state, {rule}) => {
+    on(addRule, (state: RulesState, {rule}) => {
         return ({
             rules: [...state.rules, rule]
         })

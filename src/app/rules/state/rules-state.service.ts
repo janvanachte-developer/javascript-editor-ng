@@ -4,15 +4,17 @@ import {Action, Store} from "@ngrx/store";
 import {AppState} from "../../state/app.reducer";
 import {rules} from "../../state/app.selectors";
 import {RulesState} from "./rules.reducer";
-import {ActivatedRoute, Router} from "@angular/router";
+import {Router} from "@angular/router";
 import {addRule} from "./rules.actions";
+import {AppStateService} from "../../state/app-state.service";
+import {LoggerService} from "../../monitoring/log/logger.service";
 
 @Injectable()
 class RulesStateService {
 
     private state: RulesState;
 
-    constructor(private appState: Store<AppState>, private router: Router, private route: ActivatedRoute) {
+    constructor(private appState: Store<AppState>, private router: Router, private appStateService: AppStateService, private logger: LoggerService) {
         this.appState.select(rules).subscribe(next => this.state = next)
      }
 
@@ -36,6 +38,20 @@ class RulesStateService {
 
     subscribe( subscriptionFunction) {
         this.getState().subscribe(subscriptionFunction);
+//        this.restoreState();
+//        this.restoreRouter();
+    }
+
+    private restoreState() {
+        this.logger.debug('RulesStateService restoring state');
+//        this.appStateService.restoreState();
+    }
+
+    private restoreRouter() {
+        const id = this.state.selected.id;
+        if (id) {
+            this.router.navigate(['rules', id]);
+        }
     }
 }
 

@@ -1,4 +1,4 @@
-import { rootReducers, rootInitialState } from './app.reducer';
+import {rootReducers} from './app.reducer';
 
 describe('App Reducer', () => {
   describe('an unknown action', () => {

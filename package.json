@@ -24,6 +24,7 @@
     "@ngrx/store": "^12.0.0",
     "@ngrx/store-devtools": "^12.0.0",
     "bootstrap": "^5.0.0",
+    "ngx-cookie-service": "^12.0.0",
     "prismjs": "^1.23.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.1.0",

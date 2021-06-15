@@ -3,11 +3,13 @@ import {Actions, createEffect, ofType} from '@ngrx/effects';
 import {filter, map} from "rxjs/operators";
 import {ROUTER_NAVIGATION, RouterNavigationAction} from "@ngrx/router-store";
 import {selectRule} from "./rules.actions";
+import RulesStateService from "./rules-state.service";
+import {LoggerService} from "../../monitoring/log/logger.service";
 
 @Injectable()
 export class RulesEffects {
 
-    constructor(private actions$: Actions) {
+    constructor(private actions$: Actions, private service: RulesStateService, private logger: LoggerService) {
 
         actions$.subscribe(action => {
             console.log('Action : '  + action.type);
