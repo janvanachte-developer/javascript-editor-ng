@@ -30,7 +30,7 @@ class RulesStateService {
         const id = this.state.rules.length + 1 + '';
         this.appState.dispatch(addRule({ rule: {
                 id: id,
-                name: "An added Rule",
+                name: 'New Rule (' + id + ')',
                 active: false
             }}));
         this.router.navigate([ 'rules',id]);
@@ -38,18 +38,13 @@ class RulesStateService {
 
     subscribe( subscriptionFunction) {
         this.getState().subscribe(subscriptionFunction);
-//        this.restoreState();
-//        this.restoreRouter();
-    }
-
-    private restoreState() {
-        this.logger.debug('RulesStateService restoring state');
-//        this.appStateService.restoreState();
+        this.restoreRouter();
     }
 
     private restoreRouter() {
-        const id = this.state.selected.id;
+        const id = this.state.rules.find(rule => rule.active).id;
         if (id) {
+            this.logger.debug('restoring router to rule ' + id, 'RulesState');
             this.router.navigate(['rules', id]);
         }
     }

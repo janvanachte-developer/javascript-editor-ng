@@ -8,6 +8,10 @@ import {CookieService} from "ngx-cookie-service";
 import {LoggerService} from "../monitoring/log/logger.service";
 import {AppMonitoringModule} from "../monitoring/app-monitoring.module";
 import {AppStateEffects} from "./app.effects";
+import {ngrxStoreLocalStorageMetaReducers} from "./app-state-ngrx-store-localStorage.meta-reducer";
+
+export const LOCALSTORAGE = 'state';
+export const LOCALSTORAGE_NGRX = 'state-ngrx-store-localstorage';
 
 export let InjectorInstance: Injector;
 
@@ -20,7 +24,7 @@ export let InjectorInstance: Injector;
         StoreModule.forRoot(
             rootReducers,
             {
-                metaReducers: rootMetaReducers//,
+                metaReducers: [...rootMetaReducers,...ngrxStoreLocalStorageMetaReducers]//,
                 // initialState: rootInitialState
             }),
         EffectsModule.forRoot([AppStateEffects]),
