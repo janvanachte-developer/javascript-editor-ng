@@ -39,4 +39,10 @@ const routes: Routes = [
     exports: [RouterModule]
 })
 export class RulesRoutingModule {
+
+    constructor() {
+        console.log('RulesRoutingModule created')
+
+    }
+
 }

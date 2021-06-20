@@ -1,11 +1,20 @@
 import {Action, ActionReducer, ActionReducerMap, createReducer, MetaReducer} from '@ngrx/store';
-import {CodeState} from "../code/state/code.reducer";
-import {RulesState} from "../rules/state/rules.reducer";
-import {rootInitialState} from "./app-cookie.service";
+import {codeInitialState, CodeState} from "../code/state/code.reducer";
+import {rulesInitialState, RulesState} from "../rules/state/rules.reducer";
 
 export interface AppState {
     rules: RulesState,
     code: CodeState
+}
+export const rootInitialState = () => {
+
+    console.log('########## rootInitialState ');
+
+
+    return {
+        rules: rulesInitialState,
+        code: codeInitialState
+    };
 }
 
 export const rootReducers: ActionReducerMap<any, Action> = {

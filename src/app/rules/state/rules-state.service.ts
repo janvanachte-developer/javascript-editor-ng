@@ -8,14 +8,16 @@ import {Router} from "@angular/router";
 import {addRule} from "./rules.actions";
 import {AppStateService} from "../../state/app-state.service";
 import {LoggerService} from "../../monitoring/log/logger.service";
+import {RulesStateModule} from "./rules-state.module";
 
-@Injectable()
+@Injectable({providedIn: RulesStateModule})
 class RulesStateService {
 
     private state: RulesState;
 
     constructor(private appState: Store<AppState>, private router: Router, private appStateService: AppStateService, private logger: LoggerService) {
         this.appState.select(rules).subscribe(next => this.state = next)
+        console.log('RulesStateService created');
      }
 
     getState(): Observable<RulesState> {
