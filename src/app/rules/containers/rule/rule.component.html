@@ -1,0 +1,12 @@
+<div class="container">
+    <div class="row">
+        <div class="col col-lg-10">
+            <app-rule-editing [rule]="rule" (buttonClick)="updateRule($event)"></app-rule-editing>
+            <app-rule-execution [rule]="rule" (buttonClick)="increaseExcuted($event)"></app-rule-execution>
+        </div>
+        <div class="col col-lg-2">
+            <router-outlet name="sidemenu"></router-outlet>
+        </div>
+    </div>
+
+</div>

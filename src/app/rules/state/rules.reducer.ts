@@ -1,6 +1,6 @@
 import {createReducer, on} from '@ngrx/store';
 import {Rule} from "../model/rule";
-import {addRule, selectRule} from "./rules.actions";
+import {addRule, increaseExecuted, selectRule, updateRule_OK} from "./rules.actions";
 
 export const rulesFeatureKey = 'rules';
 
@@ -34,7 +34,6 @@ export const reducer = createReducer(rulesInitialState,
         let newState = {
             rules: newRules
         };
-        console.log('returning state ' + JSON.stringify(newState));
         return newState
     }),
 
@@ -42,5 +41,35 @@ export const reducer = createReducer(rulesInitialState,
         return ({
             rules: [...state.rules, rule]
         })
+    }),
+
+    on(updateRule_OK, (state: RulesState, {rule}) => {
+
+        // @ts-ignore
+        console.log('updateRuleOK ' + rule.rule.id + ' ' + rule.rule.name)
+
+        const rules: Rule[] = [];
+        state.rules.forEach(existing => {
+                // @ts-ignore
+            rules.push(existing.id === rule.rule.id ? {...rule.rule} : existing);
+            }
+        )
+
+        return {
+            rules: rules
+        };
+    }),
+
+on(increaseExecuted, (state: RulesState, {id}) => {
+
+        const rules: Rule[] = [];
+        state.rules.forEach(existing => {
+                rules.push(existing.id === id ? {...existing, executed: existing.executed > 0 ? existing.executed + 1 : 1} : existing);
+            }
+        )
+
+        return {
+            rules: rules
+        };
     })
 );

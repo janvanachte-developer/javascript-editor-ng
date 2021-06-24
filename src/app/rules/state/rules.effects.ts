@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {Actions, createEffect, ofType} from '@ngrx/effects';
 import {filter, map} from "rxjs/operators";
 import {ROUTER_NAVIGATION, RouterNavigationAction} from "@ngrx/router-store";
-import {selectRule} from "./rules.actions";
+import {selectRule, UPDATE_RULE, updateRule_OK} from "./rules.actions";
 import RulesStateService from "./rules-state.service";
 import {LoggerService} from "../../monitoring/log/logger.service";
 
@@ -28,6 +28,17 @@ export class RulesEffects {
             map(id => {
                 console.log('triggering action SELECT_RULE with id: ' + id);
                 return selectRule({id: id});
+            })
+        )
+    })
+
+    updateRule$ = createEffect(() => {
+        return this.actions$.pipe(
+            ofType(UPDATE_RULE),
+            map(rule => {
+                // @ts-ignore
+                console.log('triggering action UPDATE_RULE_OK with id: ' + rule.id);
+                return updateRule_OK({rule: rule});
             })
         )
     })
