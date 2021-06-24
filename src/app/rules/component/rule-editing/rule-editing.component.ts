@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output, SimpleChanges} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Rule} from "../../model/rule";
 import {LoggerService} from "../../../monitoring/log/logger.service";
 import {FormBuilder, FormControl, FormGroup, Validator} from "@angular/forms";
@@ -10,7 +10,18 @@ import {FormBuilder, FormControl, FormGroup, Validator} from "@angular/forms";
 })
 export class RuleEditingComponent implements OnInit{
 
-  @Input() rule: Rule;
+  // https://dzone.com/articles/handling-property-changes-using-decorator-an-alter
+  _rule: Rule;
+  @Input()
+  get rule() {
+    return this._rule;
+  }
+  set rule(rule: Rule) {
+    this._rule = rule;
+    console.log('(replacing rule in form with ' + JSON.stringify(rule)+')'  );
+    this.metaDataForm.patchValue(rule);
+  }
+
   @Output() buttonClick= new EventEmitter<Rule>()
 
   name = new FormControl('');
@@ -22,6 +33,7 @@ export class RuleEditingComponent implements OnInit{
     this.createForm();
   }
 
+/*
   ngOnChanges(changes: SimpleChanges) {
     for (const propName in changes) {
       const change = changes[propName];
@@ -33,6 +45,7 @@ export class RuleEditingComponent implements OnInit{
       }
     }
   }
+*/
 
   private createForm() {
     const validators:Validator[] = [];
