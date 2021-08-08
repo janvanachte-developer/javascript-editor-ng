@@ -1,2 +1,2 @@
-<button (click)="onButtonClick()">Run Rule {{rule.id}}</button>
-<p>Executed {{rule.executed ? rule.executed : 0}}</p>
+<button id="ruleExecutionButton" (click)="onButtonClick()">Run Rule {{rule.id}}</button>
+<p>Executed <span id="ruleExecutionCounter">{{rule.executed ? rule.executed : 0}}</span></p>
